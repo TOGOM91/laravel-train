@@ -1,0 +1,25 @@
+MVC : 
+
+Modèle:
+  FIchier qui shématise la structure des données
+
+  Exemple: 
+        
+        User:
+                -id
+                -name
+                -email
+                -password
+
+Vue: 
+  Fichier qui s'occupe de l'affichage des données
+  Souvent utilisé avec un moteur de Templating (Liquid, Blade, Twig.. ) 
+
+Routes: 
+  C'est ce qui définis sur quel chemin, je fais quelle requête.
+  (Pour un webservices, c'est ce qui définis les endpoints de l'API)
+
+
+Controller: 
+    Fichier intermerdiaire entre le Modèle et la Vue. C'est lui qui recoit les requêtes de l'utilisateur et qui définis ce que l'on fait. 
+
