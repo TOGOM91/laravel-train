@@ -15,11 +15,21 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/users',[UserController::class, 'index']);
-Route::post('/users/register', [UserController::class, 'register']);
-Route::patch('/users/{id}', [UserController::class, 'update']);
-Route::delete('/users/{id}', [UserController::class, 'destroy']);
-Route::post('/users/login', [UserController::class, 'login']);
+
+Route::post('/users/register', [UserController::class, 'register'])->name('api.register');
+Route::post('/users/login', [UserController::class, 'login'])->name('api.login');
+
+Route::get('/profile', function () {
+    $user = auth()->user();
+    return view('profile', compact('user'));
+})->middleware(['auth', 'web']);
 
 
-Route::middleware('auth:sanctum')->get('users/me', [UserController::class, 'me']);
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::get('/users',[UserController::class, 'index']);    
+    Route::patch('/users/{id}', [UserController::class, 'update']);
+    Route::delete('/users/{id}', [UserController::class, 'destroy']);
+    Route::get('users/me', [UserController::class, 'me']);
+    Route::post('/users/logout', [UserController::class, 'logout'])->name('api.logout');
+});
